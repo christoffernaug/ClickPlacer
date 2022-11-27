@@ -21,7 +21,7 @@
   <p class="hint">Hit <span style="color: rgba(255, 255, 255, 0.75)">&lt;backspace&gt;</span> or button above to reset</p>
   <div class="canvas" @click="handleClick">
     <div v-for="point of points" class="point" :style="{ left: point.x - point.size / 2 + 'px', top: point.y - point.size / 2 + 'px', height: point.size + 'px', width: point.size + 'px', backgroundColor: '#' + point.color }"></div>
-    <p class="count" :style="counterColor">{{ points.length }}</p>
+    <p class="count" :style="{ color: counterColor }">{{ points.length }}</p>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import { ref } from "vue";
 
 const points = ref([]);
 const undoedPoints = ref([]);
-const counterColor = ref({ color: "white" });
+const counterColor = ref("#ffffff80");
 
 export default {
   created() {
@@ -56,7 +56,7 @@ export default {
       undoedPoints.value.push(undoedPoint);
       points.value = currentPoints;
 
-      counterColor.value = { color: points.value.length > 0 ? "#" + points.value[points.value.length - 1].color : "white" };
+      counterColor.value = points.value.length > 0 ? "#" + points.value[points.value.length - 1].color : "#ffffff80";
     },
     handleRedo: function () {
       const point = undoedPoints.value.pop();
@@ -64,7 +64,7 @@ export default {
       if (!point) return;
       points.value.push(point);
 
-      counterColor.value = { color: "#" + point.color };
+      counterColor.value = "#" + point.color;
     },
     handleClick: function (e) {
       const { clientX, clientY } = e;
@@ -74,7 +74,7 @@ export default {
 
       const size = Math.floor(Math.random() * ((large ? 400 : 60) - 10) + 10);
       const color = Math.floor(Math.random() * 16777215).toString(16);
-      this.counterColor.color = "#" + color;
+      counterColor.value = "#" + color;
       points.value.push({ x: clientX, y: clientY, size: size, color: color });
     },
     handleReset: function () {
@@ -89,7 +89,7 @@ export default {
 
       points.value = [];
       undoedPoints.value = [];
-      this.counterColor.color = "white";
+      counterColor.value = "ffffff80";
     },
   },
 };
@@ -136,7 +136,7 @@ button {
 
 button:disabled {
   background-color: rgba(74, 74, 74, 0.5);
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff80;
 
   cursor: not-allowed;
 }
