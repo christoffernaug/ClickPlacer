@@ -18,7 +18,7 @@
       Redo
     </button>
   </div>
-  <p class="hint">Hit <span style="color: rgba(255, 255, 255, 0.75)">&lt;backspace&gt;</span> or button above to reset</p>
+  <p class="hint">Hit &lt;<span style="color: rgba(255, 255, 255, 0.75); text-decoration: underline">backspace</span>&gt; or button above to reset</p>
   <div class="canvas" @click="handleClick">
     <div v-for="point of points" class="point" :style="{ left: point.x - point.size / 2 + 'px', top: point.y - point.size / 2 + 'px', height: point.size + 'px', width: point.size + 'px', backgroundColor: '#' + point.color }"></div>
     <p class="count" :style="{ color: counterColor }">{{ points.length }}</p>
