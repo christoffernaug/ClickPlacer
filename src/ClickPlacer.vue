@@ -55,12 +55,16 @@ export default {
       if (!undoedPoint) return;
       undoedPoints.value.push(undoedPoint);
       points.value = currentPoints;
+
+      counterColor.value = { color: points.value.length > 0 ? "#" + points.value[points.value.length - 1].color : "white" };
     },
     handleRedo: function () {
       const point = undoedPoints.value.pop();
 
       if (!point) return;
       points.value.push(point);
+
+      counterColor.value = { color: "#" + point.color };
     },
     handleClick: function (e) {
       const { clientX, clientY } = e;
