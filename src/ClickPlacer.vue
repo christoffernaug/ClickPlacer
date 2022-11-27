@@ -69,7 +69,7 @@ export default {
     handleClick: function (e) {
       const { clientX, clientY } = e;
 
-      const large = Math.random() > 0.75;
+      const large = Math.random() > 0.9;
       console.log(large);
 
       const size = Math.floor(Math.random() * ((large ? 400 : 60) - 10) + 10);
